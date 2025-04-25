@@ -1,0 +1,11 @@
+[tasks.wasm]
+command = "cargo"
+args = ["build", "--target", "wasm32-unknown-unknown"]
+
+[tasks.web-server]
+command = "basic-http-server"
+args = ["."]
+
+[tasks.web-open]
+command = "xdg-open"
+args = ["http://127.0.0.1:4000"]

@@ -74,6 +74,10 @@ async fn main() {
         });
 
     let mut frame_count: u32 = 0;
+    let mut scale = 2.5;
+    let mut x_pos = -500.;
+    let mut y_pos = -200.;
+
     let mut demo = (0..=1)
         .cartesian_product(0..=1)
         .map(|(a, b): (u8, u8)| Vector::from_vec(vec![a.into(), b.into()]))
@@ -82,6 +86,30 @@ async fn main() {
     loop {
         if is_key_pressed(KeyCode::Q) {
             std::process::exit(0);
+        }
+
+        if is_key_pressed(KeyCode::Equal) {
+            scale += 0.5;
+        }
+
+        if is_key_pressed(KeyCode::Minus) {
+            scale -= 0.5;
+        }
+
+        if is_key_pressed(KeyCode::Left) {
+            x_pos -= 50.;
+        }
+
+        if is_key_pressed(KeyCode::Right) {
+            x_pos += 50.;
+        }
+
+        if is_key_pressed(KeyCode::Up) {
+            y_pos -= 50.;
+        }
+
+        if is_key_pressed(KeyCode::Down) {
+            y_pos += 50.;
         }
 
         if frame_count == 100 {
@@ -94,7 +122,7 @@ async fn main() {
 
         xor.visualise(
             //Array::from_vec(vec![0.0, 1.0]),
-            RenderSettings::default().scale(2.5).translate(-500., -200.),
+            RenderSettings::default().scale(scale).translate(x_pos, y_pos),
         );
 
         frame_count += 1;
